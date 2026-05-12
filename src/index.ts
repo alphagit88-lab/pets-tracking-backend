@@ -11,10 +11,15 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+import ownerRoutes from "./routes/owner.routes";
+
 // Basic health check route
 app.get("/api/health", (req, res) => {
     res.json({ status: "OK", message: "Pet Tracking API is running." });
 });
+
+// API Routes
+app.use("/api/owners", ownerRoutes);
 
 AppDataSource.initialize()
     .then(() => {
