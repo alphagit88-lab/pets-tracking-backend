@@ -12,6 +12,12 @@ The backend maps out the exact requirements of physical Pet Passports into a rig
 - **`Vaccination`**: Logs immunizations (Rabies, Core, Additional) with specific batch numbers and expiration metrics. Links Many-to-One to both Pet and Clinic.
 - **`MedicalRecord`**: Generic logging for diagnostics, surgeries, deworming, and ongoing treatments utilizing a scalable JSONB schema.
 
+## Application Layers
+To adhere to Enterprise REST standards, the backend utilizes a multi-tier abstraction structure:
+- **Controllers** (`src/controllers/`): Strictly manage HTTP lifecycles, route path params, parse query flags, and return normalized payloads.
+- **Services** (`src/services/`): Encapsulate pure database operations and business validation rules to keep endpoints modular and highly testable.
+- **Middlewares** (`src/middlewares/`): Intercept incoming requests to guarantee payload parameters adhere to strict typing guidelines before engaging database connection handles.
+
 ## Technology Stack
 - **Runtime**: Node.js v20+
 - **Framework**: Express.js
