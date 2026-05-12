@@ -4,7 +4,10 @@ import dotenv from "dotenv";
 
 import { Owner } from "./entities/Owner";
 import { Pet } from "./entities/Pet";
-import { Passport } from "./entities/Passport";
+import { MicrochipRecord } from "./entities/MicrochipRecord";
+import { VeterinaryClinic } from "./entities/VeterinaryClinic";
+import { Vaccination } from "./entities/Vaccination";
+import { MedicalRecord } from "./entities/MedicalRecord";
 
 dotenv.config();
 
@@ -13,7 +16,7 @@ export const AppDataSource = new DataSource({
     url: process.env.DATABASE_URL,
     synchronize: false, // Disabled to use migrations
     logging: true,
-    entities: [Owner, Pet, Passport],
+    entities: [Owner, Pet, MicrochipRecord, VeterinaryClinic, Vaccination, MedicalRecord],
     subscribers: [],
     migrations: ["src/migrations/*.ts"],
     ssl: process.env.DATABASE_URL?.includes("localhost") ? false : {
