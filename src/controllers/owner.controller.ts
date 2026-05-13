@@ -83,6 +83,22 @@ export class OwnerController {
         }
     };
 
+    // POST /api/owners/restore
+    restoreOwnerSession = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const { email } = req.body;
+            if (!email) return res.status(400).json({ error: "Email signature parameter required for validation." });
+            
+            const owner = await this.ownerService.loginOwner(email); // omitting password fetches the user data
+            if (!owner) return res.status(401).json({ error: "Invalid session signature payload." });
+            
+            return res.json(owner);
+        } catch (error) {
+            console.error("Error restoring owner session:", error);
+            return res.status(500).json({ error: "Internal server error parsing session state." });
+        }
+    };
+
     // DELETE /api/owners/:id
     deleteOwner = async (req: Request, res: Response): Promise<any> => {
         try {
