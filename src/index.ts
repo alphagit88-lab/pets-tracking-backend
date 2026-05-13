@@ -14,6 +14,7 @@ app.use(express.json());
 import ownerRoutes from "./routes/owner.routes";
 import petRoutes from "./routes/pet.routes";
 import recordsRoutes from "./routes/records.routes";
+import dashboardRoutes from "./routes/dashboard.routes";
 import { ClinicalController } from "./controllers/clinical.controller";
 import { validateClinic } from "./middlewares/validateClinical.middleware";
 
@@ -34,6 +35,7 @@ app.delete("/api/clinics/:id", clinicalController.deleteClinic);
 app.use("/api/owners", ownerRoutes);
 app.use("/api/pets", petRoutes);
 app.use("/api", recordsRoutes);
+app.use("/api", dashboardRoutes);
 
 AppDataSource.initialize()
     .then(() => {

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn, Index } from "typeorm";
 import { Pet } from "./Pet";
 
 @Entity("microchip_records")
@@ -6,6 +6,7 @@ export class MicrochipRecord {
     @PrimaryGeneratedColumn("uuid")
     id!: string;
 
+    @Index()
     @Column({ type: "varchar", length: 100, unique: true })
     microchipNo!: string;
 
