@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 import ownerRoutes from "./routes/owner.routes";
+import petRoutes from "./routes/pet.routes";
 
 // Basic health check route
 app.get("/api/health", (req, res) => {
@@ -20,6 +21,7 @@ app.get("/api/health", (req, res) => {
 
 // API Routes
 app.use("/api/owners", ownerRoutes);
+app.use("/api/pets", petRoutes);
 
 AppDataSource.initialize()
     .then(() => {
