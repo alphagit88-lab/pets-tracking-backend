@@ -96,6 +96,17 @@ export class ClinicalService {
         });
     }
 
+    async updateVaccination(id: string, payload: Partial<Vaccination>): Promise<Vaccination | null> {
+        const vac = await this.vaccinationRepo.findOneBy({ id });
+        if (!vac) return null;
+        if (payload.vetId) {
+            const clinic = await this.clinicRepo.findOneBy({ id: payload.vetId });
+            if (!clinic) throw new Error("CLINIC_NOT_FOUND");
+        }
+        this.vaccinationRepo.merge(vac, payload);
+        return await this.vaccinationRepo.save(vac);
+    }
+
     async deleteVaccination(id: string): Promise<boolean> {
         const vac = await this.vaccinationRepo.findOneBy({ id });
         if (!vac) return false;

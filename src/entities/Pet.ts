@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, OneToMany, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne, OneToOne, OneToMany, JoinColumn, Index } from "typeorm";
 import { Owner } from "./Owner";
 import { MicrochipRecord } from "./MicrochipRecord";
 import { Vaccination } from "./Vaccination";
@@ -9,6 +9,7 @@ export class Pet {
     @PrimaryGeneratedColumn("uuid")
     id!: string;
 
+    @Index()
     @Column({ type: "varchar", length: 100 })
     name!: string;
 
@@ -29,6 +30,12 @@ export class Pet {
 
     @Column({ type: "boolean", default: false })
     sterilized!: boolean;
+
+    @Column({ type: "text", nullable: true })
+    photoUrl!: string;
+
+    @Column({ type: "text", nullable: true })
+    image!: string;
 
     @Column({ type: "uuid" })
     ownerId!: string;

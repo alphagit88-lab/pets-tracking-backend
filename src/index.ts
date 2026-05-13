@@ -9,15 +9,17 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({ limit: 524288000 })); // 500MB explicitly as numeric bytes
+app.use(express.urlencoded({ limit: 524288000, extended: true, parameterLimit: 1000000 }));
 
 import ownerRoutes from "./routes/owner.routes";
 import petRoutes from "./routes/pet.routes";
 import recordsRoutes from "./routes/records.routes";
+import dashboardRoutes from "./routes/dashboard.routes";
 import { ClinicalController } from "./controllers/clinical.controller";
 import { validateClinic } from "./middlewares/validateClinical.middleware";
 
-// Basic health check route
+// Basic health check route - triggering fresh live dev process restart
 app.get("/api/health", (req, res) => {
     res.json({ status: "OK", message: "Pet Tracking API is running." });
 });
@@ -34,6 +36,7 @@ app.delete("/api/clinics/:id", clinicalController.deleteClinic);
 app.use("/api/owners", ownerRoutes);
 app.use("/api/pets", petRoutes);
 app.use("/api", recordsRoutes);
+app.use("/api", dashboardRoutes);
 
 AppDataSource.initialize()
     .then(() => {

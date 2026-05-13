@@ -21,6 +21,12 @@ export class VeterinaryClinic {
     @Column({ type: "varchar", length: 100, nullable: true })
     contact!: string;
 
+    @Column({ type: "text", nullable: true })
+    sealUrl!: string;
+
+    @Column({ type: "text", nullable: true })
+    sealImage!: string;
+
     @OneToMany(() => Vaccination, (vaccination: Vaccination) => vaccination.veterinaryClinic)
     vaccinations!: Vaccination[];
 

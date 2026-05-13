@@ -66,6 +66,23 @@ export class OwnerController {
         }
     };
 
+    // POST /api/owners/login
+    loginOwner = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const { email, password } = req.body;
+            if (!email) return res.status(400).json({ error: "Email signature parameter required for validation." });
+            if (!password) return res.status(400).json({ error: "Password access token required for authorization." });
+            
+            const owner = await this.ownerService.loginOwner(email, password);
+            if (!owner) return res.status(401).json({ error: "Invalid email or password access payload matching this guardian ID." });
+            
+            return res.json(owner);
+        } catch (error) {
+            console.error("Error logging in owner:", error);
+            return res.status(500).json({ error: "Internal server error parsing authentication state." });
+        }
+    };
+
     // DELETE /api/owners/:id
     deleteOwner = async (req: Request, res: Response): Promise<any> => {
         try {
