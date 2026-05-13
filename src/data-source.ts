@@ -14,7 +14,7 @@ dotenv.config();
 export const AppDataSource = new DataSource({
     type: "postgres",
     url: process.env.DATABASE_URL,
-    synchronize: false, // Disabled to use migrations
+    synchronize: true, // Enabled to seamlessly sync schema columns
     logging: true,
     entities: [Owner, Pet, MicrochipRecord, VeterinaryClinic, Vaccination, MedicalRecord],
     subscribers: [],

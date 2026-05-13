@@ -124,6 +124,19 @@ export class ClinicalController {
         }
     };
 
+    updateVaccination = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const { id } = req.params;
+            const vac = await this.clinicalService.updateVaccination(id as string, req.body);
+            if (!vac) return res.status(404).json({ error: "Vaccination entry not found." });
+            return res.json(vac);
+        } catch (error: any) {
+            if (error.message === "CLINIC_NOT_FOUND") return res.status(404).json({ error: "Targeted veterinary clinic not found." });
+            console.error("Error updating vaccination:", error);
+            return res.status(500).json({ error: "Internal server error modifying log." });
+        }
+    };
+
     deleteVaccination = async (req: Request, res: Response): Promise<any> => {
         try {
             const { id } = req.params;

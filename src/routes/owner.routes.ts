@@ -13,6 +13,7 @@ router.post("/:ownerId/pets", validatePetCreation, petController.createPet);
 router.get("/:ownerId/pets", petController.getPetsByOwner);
 
 // Owner standard CRUD
+router.post("/login", ownerController.loginOwner);
 router.post("/", validateOwnerCreation, ownerController.createOwner);
 router.get("/", ownerController.getOwners);
 router.get("/:id", ownerController.getOwnerById);

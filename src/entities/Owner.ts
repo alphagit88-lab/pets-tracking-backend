@@ -25,6 +25,9 @@ export class Owner {
     @Column({ type: "varchar", length: 255, unique: true })
     email!: string;
 
+    @Column({ type: "varchar", length: 255, nullable: true })
+    password!: string;
+
     @Column({ type: "varchar", length: 150, nullable: true })
     emergencyContactName!: string;
 

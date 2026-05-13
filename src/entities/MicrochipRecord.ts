@@ -22,6 +22,12 @@ export class MicrochipRecord {
     @Column({ type: "varchar", length: 150, nullable: true })
     vetClinicName!: string;
 
+    @Column({ type: "text", nullable: true })
+    stickerUrl!: string;
+
+    @Column({ type: "text", nullable: true })
+    stickerImage!: string;
+
     @Column({ type: "uuid", unique: true })
     petId!: string;
 

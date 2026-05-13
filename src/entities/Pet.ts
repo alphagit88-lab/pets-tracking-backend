@@ -31,6 +31,12 @@ export class Pet {
     @Column({ type: "boolean", default: false })
     sterilized!: boolean;
 
+    @Column({ type: "text", nullable: true })
+    photoUrl!: string;
+
+    @Column({ type: "text", nullable: true })
+    image!: string;
+
     @Column({ type: "uuid" })
     ownerId!: string;
 
