@@ -184,4 +184,16 @@ export class ClinicalController {
             return res.status(500).json({ error: "Internal server error deleting record." });
         }
     };
+
+    updateMedicalRecord = async (req: Request, res: Response): Promise<any> => {
+        try {
+            const { id } = req.params;
+            const record = await this.clinicalService.updateMedicalRecord(id as string, req.body);
+            if (!record) return res.status(404).json({ error: "Medical record entry not found." });
+            return res.json(record);
+        } catch (error) {
+            console.error("Error updating medical record:", error);
+            return res.status(500).json({ error: "Internal server error updating record." });
+        }
+    };
 }

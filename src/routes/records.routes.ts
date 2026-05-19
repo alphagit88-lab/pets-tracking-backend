@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { ClinicalController } from "../controllers/clinical.controller";
-import { validateVaccination } from "../middlewares/validateClinical.middleware";
+import { validateVaccination, validateMedicalRecord } from "../middlewares/validateClinical.middleware";
 
 const router = Router();
 const clinicalController = new ClinicalController();
@@ -8,6 +8,7 @@ const clinicalController = new ClinicalController();
 // Top-level sub-resource specific modifications and deletions
 router.put("/vaccinations/:id", validateVaccination, clinicalController.updateVaccination);
 router.delete("/vaccinations/:id", clinicalController.deleteVaccination);
+router.put("/medical-records/:id", validateMedicalRecord, clinicalController.updateMedicalRecord);
 router.delete("/medical-records/:id", clinicalController.deleteMedicalRecord);
 
 export default router;
