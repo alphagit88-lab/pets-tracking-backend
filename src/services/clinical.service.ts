@@ -136,4 +136,11 @@ export class ClinicalService {
         await this.medicalRepo.remove(record);
         return true;
     }
+
+    async updateMedicalRecord(id: string, payload: Partial<MedicalRecord>): Promise<MedicalRecord | null> {
+        const record = await this.medicalRepo.findOneBy({ id });
+        if (!record) return null;
+        this.medicalRepo.merge(record, payload);
+        return await this.medicalRepo.save(record);
+    }
 }

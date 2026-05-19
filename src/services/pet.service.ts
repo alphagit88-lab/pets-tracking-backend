@@ -28,7 +28,7 @@ export class PetService {
 
         return await this.petRepository.find({
             where: { ownerId },
-            relations: ["microchipRecord", "vaccinations", "medicalRecords"],
+            relations: ["owner", "microchipRecord", "vaccinations", "medicalRecords"],
             order: { createdAt: "DESC" }
         });
     }
